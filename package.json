@@ -10,6 +10,9 @@
     "morgan": "^1.10.0",
     "socket.io": "^2.3.0"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

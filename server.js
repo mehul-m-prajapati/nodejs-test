@@ -10,6 +10,7 @@ const https = require('https');
 const fs = require('fs');
 let http_server = http.createServer(app);
 const io = require('socket.io')(http_server);
+const PORT = process.env.PORT || 8000;
 
 app.set('view engine', 'ejs');
 app.use(morgan('dev'));
@@ -32,7 +33,7 @@ app.post('/form_submit', (req, res) => {
     res.json({name: req.body.first_name});
 });
 
-http_server.listen(process.env.PORT || 8000, () => {
+http_server.listen(PORT, () => {
     console.log('server started on 8000');
 });
 
