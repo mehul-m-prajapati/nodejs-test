@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
+        <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="styles.css" >
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+        <title>My test app</title>
+    </head>
+
+    <body>
+        <header>
+            <h2>Chat</h2>
+        </header>
+       
+        <section>
+            <div id="change_username">
+                <input id="username" type="text" />
+                <button id="send_username" type="button">Change username</button>
+            </div>
+        </section>
+      
+        <section id="chatroom">
+            <section id="feedback"></section>
+        </section>
+      
+        <section id="input_zone"> 
+            <input id="message" class="vertical-align" type="text" />
+            <button id="send_message" class="vertical-align" type="button">Send</button>
+        </section>
+
+        <!--
+        <form action="/form_submit" method="GET">
+            <label>First Name:</label>
+            <input type="text" name="first_name"><br/>
+            <input type="submit" value="submit">
+        </form>
+  
+        <form action="/form_submit" method="POST">
+            <label>Post First Name:</label>
+            <input type="text" name="first_name"><br/>
+            <input type="submit" value="submit">
+        </form>
+        -->
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript">
+            $(() => {
+                var socket = io.connect('http://localhost:8082');
+                var message = $("#message");
+                var username = $("#username");
+                var send_message = $("#send_message");
+                var send_username = $("#send_username");
+                var chatroom = $("#chatroom");
+                var feedback = $("#feedback");
+
+                socket.on('new_message', (data) => {
+                    feedback.html('');
+                    message.val('');
+                    chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>");
+                });
+                
+                socket.on('typing', (data) => {
+                    feedback.html("<p><i>" + data.username + " is typing..." + "</i><p>");
+                });
+
+                
+                send_message.click(() => {
+                    socket.emit('new_message', {message: message.val()});
+                });
+
+                send_username.click(() => {
+                    socket.emit('change_username', {username: username.val()});
+                });
+
+                message.bind("keypress", () => {
+                    socket.emit('typing');
+                });
+
+
+            });
+        </script>
+    </body>
+</html>
