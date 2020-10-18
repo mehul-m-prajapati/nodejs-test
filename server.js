@@ -23,6 +23,10 @@ app.get('/', (req, res) => {
     res.render("index.ejs");
 });
 
+app.get('/plotlygraph', (req, res) => {
+    res.render("plotlygraph.ejs");
+});
+
 app.get('/form_submit', (req, res) => {
 
     res.json({name: req.query.first_name});
