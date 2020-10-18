@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     res.render("index.ejs");
 });
 
-app.get('/plotlygraph', (req, res) => {
+app.get('/plotlygraphs', (req, res) => {
     res.render("plotlygraph.ejs");
 });
 
