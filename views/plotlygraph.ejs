@@ -15,10 +15,37 @@
 
     <body>
 
-        <div id="bar-chart"></div>
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
 
+            <div id="bar-chart"></div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
+
+            <div id="scatter-chart"></div>
+        </div>
 
         <script>
+            var t1 = {
+            x: [10, 20, 30, 40],
+            y: [10, 15, 13, 17],
+            mode: 'markers',
+            type: 'scatter'
+            };
+
+            var t2 = {
+            x: [11, 22, 33, 44],
+            y: [12, 9, 15, 12],
+            mode: 'lines+markers',
+            type: 'scatter'
+            };
+
+            var data = [t1, t2];
+
+            Plotly.newPlot('scatter-chart', data);
+
+
             var trace1 = {
                 x: ['Deer', 'Horse', 'Tiger'],
                 y: [110, 134, 243],
